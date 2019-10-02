@@ -6,7 +6,8 @@ const BookingSchema = new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }, spot:{
+    },
+    spot:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Spot'
     }
