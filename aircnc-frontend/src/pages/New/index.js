@@ -3,14 +3,14 @@ import api from '../../services/api';
 import camera from '../../assets/camera.svg';
 import './styles.css';
 
-export default function New( { history }) {
+export default function New({ history }) {
     const [company, setCompany] = useState('');
     const [techs, setTechs] = useState('');
     const [price, setPrice] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
 
-    preview = useMemo(()=> {
-        return thumbnail? URL.createObjectURL(thumbnail) : null;
+    const preview = useMemo(() => {
+        return thumbnail ? URL.createObjectURL(thumbnail) : null;
     }, [thumbnail])
 
 
@@ -24,19 +24,19 @@ export default function New( { history }) {
         data.append('price', price);
 
 
-        await api.post('/spots', data,{
-            headers: {user_id}
+        await api.post('/spots', data, {
+            headers: { user_id }
         })
 
-        history.push('/dashboard')
+        history.push('/profile')
     }
     return (
-        <form onSubmit={handleSubmit}
-        style={{backgroundImage: `url(${preview})`}}
-        className={thumbnail ? `has-thumbnail` : ``}>
-            <label className="thumbnail">
-                <input type="file" onChange={event => setThumbnail(event.target.files[0])}/>
-                <img src={camera} alt="Select img"/>
+        <form onSubmit={handleSubmit}>
+            <label id="thumbnail"
+                className={thumbnail ? 'has-thumbnail' : ''}
+                style={{ backgroundImage: `url(${preview})` }} >
+                <input type="file" onChange={event => setThumbnail(event.target.files[0])} />
+                <img src={camera} alt="Select img" />
             </label>
             <label htmlFor="company">Empresa *</label>
             <input type="text"
@@ -59,7 +59,7 @@ export default function New( { history }) {
                 value={price}
                 onChange={event => setPrice(event.target.value)} />
 
-                <button type="submit" className="btn">Cadastrar</button>
+            <button type="submit" className="btn">Cadastrar</button>
         </form>
     )
 }
