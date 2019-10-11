@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from "react";
-import {SafeAreaView,View, Text, AsyncStorage, Image, StyleSheet} from "react-native";
+import Socketio from 'socket.io-client';
+
+import {Alert,SafeAreaView,View, Text, AsyncStorage, Image, StyleSheet} from "react-native";
 
 import SpotList from '../components/SpotList'
 
@@ -9,7 +11,17 @@ import { ScrollView } from "react-native-gesture-handler";
 
 export default function List(){
     const [techs, setTechs] = useState([]);
-
+    useEffect(()=>{
+        AsyncStorage.getItem('user').then(user_id =>{
+            const socket = Socketio('http://192.168.20.82:3300',{
+                query:{ user_id }
+            })
+            socket.on('booking_response', booking =>{
+                Alert.alert(`Reserva ${booking.approved ? 'Aprovada': 'Reprovada'}`,
+                `Sua reserva em ${booking.spot.company} na data ${booking.date} foi ${booking.approved ? 'Aprovada': 'Reprovada'}`)
+            })
+        })
+    },[])
 useEffect(() => {
 
     AsyncStorage.getItem('techs').then(storageThechs=>{

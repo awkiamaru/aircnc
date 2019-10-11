@@ -12,8 +12,8 @@ export default function Login({navigation}){
 
 
 useEffect(()=>{
-    AsyncStorage.getItem('user').then(user =>{
-        // AsyncStorage.removeItem('user').then(user =>{
+    // AsyncStorage.getItem('user').then(user =>{
+        AsyncStorage.removeItem('user').then(user =>{
         if(user){
             navigation.navigate('List');
         }

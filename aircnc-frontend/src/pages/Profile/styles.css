@@ -31,3 +31,63 @@ ul.spot-list li span{
     font-size: 15px;
     color: #999;
 }
+
+ul.notifications li {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 24px;
+    border-color: 1px;
+}
+
+ul.notifications li button{
+    margin-right: 10px;
+    border: 1;
+    font-weight:bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.btn-accept{
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Green */
+.success {
+    border-color: #4CAF50;
+    background-color: #4CAF50;
+    color: #FFF;
+  }
+
+  .success:hover {
+    background-color: rgb(17, 143, 21);
+    color: white;
+  }
+/* Red */
+.danger {
+    border-color: #f44336;
+    background: #f44336;
+    color: #FFF;
+  }
+  
+  .danger:hover {
+    background: #eb1f11;
+    color: white;
+  }
+    
+  
+.card{
+    text-align: center;
+ border: solid 1px rgb(224, 219, 219);
+    border-radius: 5px;
+    color: black;
+    padding: 10px 5px;
+    margin-bottom:10px;
+    list-style-type: none;
+}

@@ -1,13 +1,36 @@
+let dataBase = 'semana09'
+let password = 'coxinha123'
 const express = require('express');
 const routes = require('./routes');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
+const socketio  = require('socket.io');
+const http = require('http')
 
 const app = express();
+const server = http.Server(app);
+const io = socketio(server);
 
-let dataBase = 'semana09'
-let password = 'coxinha123'
+const connectedUsers = {};
+
+
+
+io.on('connection', socket =>{
+    console.log('====================================');
+    console.log('Usuario conectado', socket.id);
+    console.log('====================================');
+    const { user_id } = socket.handshake.query;
+    connectedUsers[user_id] = socket.id;
+})
+
+
+app.use((req,res,next) =>{
+    req.io = io;
+    req.connectedUsers = connectedUsers;
+    return next();
+})
+
 
 mongoose.connect(`mongodb+srv://fragment:${password}@aircnc-jkc9j.gcp.mongodb.net/${dataBase}?retryWrites=true&w=majority`,
 {
@@ -16,12 +39,15 @@ mongoose.connect(`mongodb+srv://fragment:${password}@aircnc-jkc9j.gcp.mongodb.ne
 
 })
 
+
+
+
 app.use(cors());
 
 app.use(express.json());
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')))
 app.use(routes);
 
-app.listen(3300);
+server.listen(3300);
 
 
