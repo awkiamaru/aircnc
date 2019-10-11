@@ -8,7 +8,7 @@ import logo from '../assets/logo.png'
 
 export default function Login({navigation}){
     const [email, setEmail] = useState('joaozinho@joao');
-    const [techs, setTechs] = useState('Java,ReactJs,React-Natice,PHP,Perl,Psql,GCP,Nosql,sql,JS');
+    const [techs, setTechs] = useState('Java, ReactJS, React Native, Kotlin, C++');
 
 
 useEffect(()=>{
