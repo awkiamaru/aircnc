@@ -1,5 +1,8 @@
-let dataBase = 'semana09'
-let password = 'coxinha123'
+let dataBase = ''
+let password = ''
+let username = ''
+// Mongo Connect datas
+
 const express = require('express');
 const routes = require('./routes');
 const mongoose = require('mongoose');
@@ -18,7 +21,7 @@ const connectedUsers = {};
 
 io.on('connection', socket =>{
     console.log('====================================');
-    console.log('Usuario conectado', socket.id);
+    console.log('Connected user!', socket.id);
     console.log('====================================');
     const { user_id } = socket.handshake.query;
     connectedUsers[user_id] = socket.id;
@@ -32,7 +35,7 @@ app.use((req,res,next) =>{
 })
 
 
-mongoose.connect(`mongodb+srv://fragment:${password}@aircnc-jkc9j.gcp.mongodb.net/${dataBase}?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://${username}:${password}@aircnc-jkc9j.gcp.mongodb.net/${dataBase}?retryWrites=true&w=majority`,
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
